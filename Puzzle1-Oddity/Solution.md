@@ -23,7 +23,6 @@ public static boolean isOdd(int i) {
 }
 ```
 
-Puzzle 2: Time for a Change 7
 If you are using the ```isOdd``` method in a performance-critical setting, you would be better off using the bitwise AND operator ```&``` in place of the remainder operator:
 
 ```java
