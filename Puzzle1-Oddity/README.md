@@ -8,4 +8,4 @@
   }
 ```
 
-[Ответ]()
+[Ответ](https://github.com/YaroslavMizgirev/JavaPuzzlers/blob/main/Puzzle1-Oddity/Solution.md)
