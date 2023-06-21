@@ -17,7 +17,9 @@
 имеет тот же знак что и левый операнд в выражении.
 
 Результат же выполнения метода ```isOdd``` предполагает, что все остатки положительны, на основании определения термина нечетное число.
-Although this assumption makes sense for some kinds of division [Boute92](https://dl.acm.org/doi/10.1145/128861.128862?dl=ACM&coll=portal "Boute, Raymond. “The Euclidean definition of the functions div and mod.” In ACM Transactions on Programming Languages and Systems, Vol. 14, No. 2 (April 1992): 127–144."), Java’s remainder operation is perfectly matched to its integer division operation, which discards the fractional part of its result.
+
+Хотя это предположение имеет смысл для некоторых видов деления [Boute92](https://dl.acm.org/doi/10.1145/128861.128862?dl=ACM&coll=portal "Boute, Raymond. “The Euclidean definition of the functions div and mod.” In ACM Transactions on Programming Languages and Systems, Vol. 14, No. 2 (April 1992): 127–144."), операция остатка в Java идеально соответствует операции целочисленного деления, которая отбрасывает дробную часть результата.
+
 When ```i``` is a negative odd number, ```i%2``` is equal to ```-1``` rather than ```1```, so the ```isOdd``` method incorrectly returns false.
 To prevent this sort of surprise, test that your methods behave properly when passed negative, zero, and positive values for each numerical parameter.
 The problem is easy to fix. Simply compare ```i%2``` to ```0``` rather than to ```1```, and reverse the sense of the comparison:
