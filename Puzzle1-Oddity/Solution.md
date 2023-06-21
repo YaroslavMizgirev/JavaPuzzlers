@@ -18,11 +18,13 @@
 
 Результат же выполнения метода ```isOdd``` предполагает, что все остатки положительны, на основании определения термина нечетное число.
 
-Хотя это предположение имеет смысл для некоторых видов деления [Boute92](https://dl.acm.org/doi/10.1145/128861.128862?dl=ACM&coll=portal "Boute, Raymond. “The Euclidean definition of the functions div and mod.” In ACM Transactions on Programming Languages and Systems, Vol. 14, No. 2 (April 1992): 127–144."), операция остатка в Java идеально соответствует операции целочисленного деления, которая отбрасывает дробную часть результата.
+Хотя это предположение имеет смысл для некоторых видов деления [Boute92](https://dl.acm.org/doi/10.1145/128861.128862?dl=ACM&coll=portal "Boute, Raymond. “The Euclidean definition of the functions div and mod.” In ACM Transactions on Programming Languages and Systems, Vol. 14, No. 2 (April 1992): 127–144."), операция (```%```) вычисление остатка от деления в Java идеально соответствует операции целочисленного деления, которая отбрасывает дробную часть результата.
 
-When ```i``` is a negative odd number, ```i%2``` is equal to ```-1``` rather than ```1```, so the ```isOdd``` method incorrectly returns false.
-To prevent this sort of surprise, test that your methods behave properly when passed negative, zero, and positive values for each numerical parameter.
-The problem is easy to fix. Simply compare ```i%2``` to ```0``` rather than to ```1```, and reverse the sense of the comparison:
+Когда ```i``` отрицательное нечетное число, операция ```i%2``` возвращает ```-1``` скорее чем ```1```, в итоге метод ```isOdd``` возвращает некорректное значение.
+
+Чтобы предотвратить такого рода неожиданности, проверяйте правильность работы ваших методов при передаче отрицательных, нулевых и положительных значений для каждого числового параметра.
+
+С другой стороны эту проблему легко исправить: просто сравнивайте результат операции ```i%2``` с ```0``` скорее чем с ```1```, и заменяйте логическую операцию срравнивания на противоположную:
 
 ```java
 public static boolean isOdd(int i) {
@@ -30,7 +32,7 @@ public static boolean isOdd(int i) {
 }
 ```
 
-If you are using the ```isOdd``` method in a performance-critical setting, you would be better off using the bitwise AND operator ```&``` in place of the remainder operator:
+Если вы используете метод ```isOdd``` в критичной для производительности настройке, вам предпочтительнее пользоваться побитовым оператором ```AND``` (```&```) вместо оператора остаток от деления (```%```):
 
 ```java
 public static boolean isOdd(int i) {
@@ -38,8 +40,9 @@ public static boolean isOdd(int i) {
 }
 ```
 
-The second version may run much faster than the first, depending on what platform and virtual machine you are using, and is unlikely to run slower.
-As a general rule, the divide and remainder operations are slow compared to other arithmetic and logical operations.
-It’s a bad idea to optimize prematurely, but in this case, the faster version is as clear as the original, so there is no reason to prefer the original.
-In summary, think about the signs of the operands and of the result whenever you use the remainder operator.
-The behavior of this operator is obvious when its operands are nonnegative, but it isn’t so obvious when one or both operands are negative.
+Вторая версия может работать намного быстрее первой, в зависимости от того, какую платформу и виртуальную машину вы используете, и вряд ли будет работать медленнее.
+Как правило, операция деление(```/```) и возвращение остатка от операции деления(```%```) выполняются медленнее, чем другие арифметические и логические операции.
+Преждевременная оптимизация — плохая идея, но в этом случае более быстрая версия так же понятна, как и оригинал, поэтому нет причин предпочесть оригинал.
+
+Таким образом, всякий раз, когда вы используете оператор возвращения остатка от операции деления (```%```) вспоминайте о знаках операндов и результата.
+Поведение оператора возвращение остатка от деления (```%```) очевидно, когда его операнды неотрицательны, но не так очевидно, когда один или оба операнда отрицательны.
